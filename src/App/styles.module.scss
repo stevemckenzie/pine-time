@@ -1,0 +1,86 @@
+@import '../styles/colors.scss';
+@import '../styles/mixins.scss';
+
+.app {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+
+  .header {
+    align-items: center;
+    background-color: rgba($richBlack, 0.96);
+    color: $aliceBlue;
+    display: flex;
+    height: 4rem;
+    justify-content: space-between;
+    left: 0;
+    padding: 1rem;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+
+    @include breakpoint() {
+      padding: 1rem 2rem;
+    }
+
+    @include light {
+      background-color: $aliceBlue;
+      color: $richBlack;
+    }
+
+    .searchButton {
+      background: url(/images/icons/search.aliceBlue.svg) center center
+        no-repeat;
+      background-size: 1.25rem;
+      height: 2rem;
+      margin-right: -0.5rem;
+      transition: 0.15s opacity;
+      width: 2rem;
+
+      span {
+        display: none;
+      }
+
+      @include breakpoint() {
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+
+      @include light() {
+        background-image: url(/images/icons/search.black.svg);
+      }
+    }
+
+    .logo {
+      background: url(/images/logo.aliceBlue.svg) right center no-repeat;
+      background-size: contain;
+      display: block;
+      height: 2rem;
+      text-decoration: none;
+      width: 2.7rem;
+
+      @include light() {
+        background-image: url(/images/logo.charcoal.svg);
+      }
+
+      h1 {
+        display: none;
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    max-width: 60rem;
+    padding: 5rem 1rem;
+    position: relative;
+
+    @include breakpoint() {
+      padding: 6rem 2rem;
+    }
+  }
+}

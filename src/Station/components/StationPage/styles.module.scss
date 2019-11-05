@@ -1,0 +1,11 @@
+.stationPage {
+  display: flex;
+  flex: 1;
+
+  .loadingIndicator {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+}
