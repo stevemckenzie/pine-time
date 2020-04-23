@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [showLogo, setShowLogo] = useState(false);
-
-  useEffect(() => {
-    if (showLogo) {
-      setTimeout(() => {
-        setShowLogo(false);
-      }, 3000);
-    }
-  }, [showLogo]);
-
   return (
     <div className="App">
       <header className="App-header">
-        {showLogo && <img src={logo} className="App-logo" alt="logo" />}
-        <button onClick={() => setShowLogo(true)}>Show Logo</button>
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
       </header>
     </div>
   );
