@@ -1,38 +1,22 @@
-import { Drawer, Button, Layout } from 'antd';
-import React, { useState } from 'react';
-import 'antd/dist/antd.css';
+import React from 'react';
 
-import Search from '../Search';
+import Link from '../UI/components/Link';
+import Routes from '../routes';
 
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
-const { Content, Header } = Layout;
-
-function App() {
-  const [showSearch, setShowSearch] = useState(false);
-  const onShowSearch = () => setShowSearch(true);
-  const onHideSearch = () => setShowSearch(false);
-
-  return (
-    <Layout>
-      <Header>
-        <Button onClick={onShowSearch} type="link">
-          +
-        </Button>
-      </Header>
-      <Content>content...</Content>
-      <div className={styles.app}>
-      </div>
-      <Drawer
-        onClose={onHideSearch}
-        placement="right"
-        title="Search"
-        visible={showSearch}
-      >
-        <Search />
-      </Drawer>
-    </Layout>
-  );
-}
+const App = () => (
+  <div className={styles.app}>
+    <div className={styles.header}>
+      <Link className={styles.logo} to="/">
+        <h1>Pine Time</h1>
+      </Link>
+      <Link className={styles.searchButton} title="Search for a weather station" to="/stations/search" />
+    </div>
+    <div className={styles.content}>
+      <Routes />
+    </div>
+  </div>
+);
 
 export default App;
