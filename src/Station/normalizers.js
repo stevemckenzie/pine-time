@@ -1,3 +1,5 @@
+import { sortBy } from 'lodash';
+
 export const normalizeStations = (features) =>
   features.map(
     ({
@@ -22,7 +24,7 @@ export const normalizeStations = (features) =>
   );
 
 export const normalizeStationItems = (features) =>
-  features.map(
+  sortBy(features.map(
     ({
       properties: {
         LOCAL_DATE: date,
@@ -41,4 +43,4 @@ export const normalizeStationItems = (features) =>
       minTemperature,
       totalPrecipitation,
     }),
-  );
+  ), 'date');
