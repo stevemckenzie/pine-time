@@ -1,15 +1,17 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { DATE_FORMAT } from '../../../constants';
-import LoadingIndicator from '../../../UI/components/LoadingIndicator';
-import Table from '../../../UI/components/Table';
+import { loadStation } from '../../actions/loadStation';
+import { loadStationItems } from '../../actions/loadStationItems';
+import { DATE_FORMAT } from '../../constants';
+import { getStation, getStationItems, isLoading } from '../../selectors';
+
+import LoadingIndicator from '../LoadingIndicator';
+import Table from '../Table';
 
 import styles from './styles.module.scss';
-import { loadStationData } from '../../actions/loadStationData';
-import { getStation, getStationItems } from '../../selectors';
 
 const HEADERS = [
   'Date',
@@ -40,16 +42,15 @@ const StationPage = () => {
       totalPrecipitation > 0 ? `${totalPrecipitation}mm` : 0,
     ],
   );
-
-  // TODO: figure out better state management around loading data.
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector(isLoading);
 
   useEffect(() => {
     if (!id) {
       return;
     }
 
-    dispatch(loadStationData(id, setLoading));
+    dispatch(loadStation(id));
+    dispatch(loadStationItems(id));
   }, [dispatch, id]);
 
   return (
@@ -61,7 +62,7 @@ const StationPage = () => {
           <div className={styles.station}>
             <h2>{stationName}</h2>
             <div>{province}</div>
-            <div>Elevation: {elevation}m</div>
+            <div>Station elevation: {elevation}m</div>
             <div>First updated: {moment(firstUpdated).format(DATE_FORMAT)}</div>
             <div>Last updated: {moment(lastUpdated).format(DATE_FORMAT)}</div>
           </div>

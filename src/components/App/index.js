@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Link from '../UI/components/Link';
-import Routes from '../routes';
+import Link from '../Link';
+import Routes from '../../routes';
 
 import styles from './styles.module.scss';
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import SearchPage from './Station/components/SearchPage';
-import StationPage from './Station/components/StationPage';
+import SearchPage from './components/SearchPage';
+import StationPage from './components/StationPage';
 
 const Routes = () => (
   <Switch>
