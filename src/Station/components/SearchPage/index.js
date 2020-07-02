@@ -1,14 +1,13 @@
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 
+import { searchClimateStations } from '../../../api';
 import { DATE_FORMAT } from '../../../constants';
 import Button from '../../../UI/components/Button';
 import Link from '../../../UI/components/Link';
 
-import { searchStations } from '../../actions/searchStations';
-import { getSearchResults } from '../../selectors';
+import { normalizeStations } from '../../normalizers';
 
 import styles from './styles.module.scss';
 
@@ -20,12 +19,13 @@ const SearchPage = () => {
   } = useForm({
     mode: 'onChange',
   });
-  const dispatch = useDispatch();
-  const onSubmit = async ({ stationName }) =>
-    dispatch(searchStations(stationName));
-
-  const results = useSelector(getSearchResults);
+  const [results, setResults] = useState([]);
   const showNoResults = isSubmitted && !isSubmitting && results.length === 0;
+  const onSubmit = async ({ stationName }) => {
+    const { features = [] } = await searchClimateStations(stationName);
+    const searchResults = normalizeStations(features);
+    setResults(searchResults);
+  };
 
   return (
     <div className={styles.search}>

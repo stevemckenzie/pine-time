@@ -4,7 +4,6 @@ import { combineReducers } from 'redux';
 const initialState = {
   favorites: [],
   items: {},
-  searchResults: [],
   stations: {},
 };
 
@@ -39,13 +38,6 @@ const stations = (state = initialState, { type, ...props }) => {
       return {
         ...state,
         favorites,
-      };
-    }
-
-    case 'SEARCH_RESULTS_UPDATE': {
-      return {
-        ...state,
-        ...props,
       };
     }
 
