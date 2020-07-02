@@ -1,32 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger';
-import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import reducer from './reducer';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from './store';
 import './styles/index.scss';
 
-// TODO: anything to add?
-const thunkMiddleware = thunk.withExtraArgument({});
-const middleware = [thunkMiddleware];
-const isProduction = process.env.NODE_ENV === 'production';
-
-if (!isProduction) {
-  middleware.push(createLogger());
-}
-
-// TODO: does not support hot reloading yet...
-const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
-const store = createStoreWithMiddleware(reducer);
-
-if (!isProduction && module.hot) {
-  module.hot.accept('./reducer', () => store.replaceReducer(reducer));
-}
+const store = createStore();
 
 ReactDOM.render(
   <React.StrictMode>
