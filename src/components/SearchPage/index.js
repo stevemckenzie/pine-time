@@ -2,12 +2,12 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { searchClimateStations } from '../../../api';
-import { DATE_FORMAT } from '../../../constants';
-import Button from '../../../UI/components/Button';
-import Link from '../../../UI/components/Link';
-
+import { searchClimateStations } from '../../api';
+import { DATE_FORMAT } from '../../constants';
 import { normalizeStations } from '../../normalizers';
+
+import Button from '../Button';
+import Link from '../Link';
 
 import styles from './styles.module.scss';
 
@@ -22,7 +22,7 @@ const SearchPage = () => {
   const [results, setResults] = useState([]);
   const showNoResults = isSubmitted && !isSubmitting && results.length === 0;
   const onSubmit = async ({ stationName }) => {
-    const { features = [] } = await searchClimateStations(stationName);
+    const { features = [] } = await searchClimateStations({ stationName });
     const searchResults = normalizeStations(features);
     setResults(searchResults);
   };

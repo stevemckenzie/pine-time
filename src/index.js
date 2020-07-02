@@ -6,8 +6,8 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import App from './App';
 import reducer from './reducer';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import './styles/index.scss';
 

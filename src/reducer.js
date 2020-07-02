@@ -1,13 +1,10 @@
 import { combineReducers } from 'redux';
 
-// TODO: load from localStorage.
-const initialState = {
+const stations = (state = {
   favorites: [],
   items: {},
   stations: {},
-};
-
-const stations = (state = initialState, { type, ...props }) => {
+}, { type, ...props }) => {
   switch (type) {
     case 'FAVORITE_ADD': {
       const { id } = props;
@@ -70,6 +67,23 @@ const stations = (state = initialState, { type, ...props }) => {
   }
 };
 
+const ui = (state = { loading: 0 }, { type, ...props }) => {
+  switch (type) {
+    case 'SET_LOADING': {
+      const loading = state.loading + props.loading;
+
+      return {
+        ...state,
+        loading,
+      };
+    }
+
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   stations,
+  ui,
 });

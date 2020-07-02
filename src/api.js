@@ -4,11 +4,7 @@ import { stringify } from 'querystring';
 const API_URL = 'https://geo.weather.gc.ca/geomet/features/collections';
 const DEFAULT_QUERY = { f: 'json' };
 
-export const apiClient = async ({
-  url,
-  options = {},
-  query = {},
-}) => {
+export const apiClient = async ({ url, options = {}, query = {} }) => {
   const q = stringify({
     ...DEFAULT_QUERY,
     ...omitBy(query, (v) => !v),
@@ -23,11 +19,15 @@ export const apiClient = async ({
   return response.json();
 };
 
-export const searchClimateStations = async (stationName) =>
+// TODO: figure out how to limit stations to ones that have been updated within 30 days.
+export const searchClimateStations = async ({
+  limit = 30,
+  stationName,
+}) =>
   apiClient({
     url: '/climate-stations/items',
     query: {
-      limit: 25,
+      limit,
       STATION_NAME: stationName,
     },
   });
@@ -38,7 +38,13 @@ export const getClimateStation = async (id) =>
     query: { CLIMATE_IDENTIFIER: id },
   });
 
-export const getClimateStationItems = async ({ id, day, limit = 30, month, year }) =>
+export const getClimateStationItems = async ({
+  id,
+  day,
+  limit = 30,
+  month,
+  year,
+}) =>
   apiClient({
     url: `/climate-daily/items/`,
     query: {
