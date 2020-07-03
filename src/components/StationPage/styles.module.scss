@@ -1,3 +1,5 @@
+@import '../../styles/mixins.scss';
+
 .stationPage {
   display: flex;
   flex: 1;
@@ -7,5 +9,33 @@
     display: flex;
     flex: 1;
     justify-content: center;
+  }
+}
+
+.favoriteButton {
+  background: url(/images/icons/favorite.aliceBlue.svg) center center no-repeat;
+  background-size: 1.25rem;
+  border: none;
+  height: 2rem;
+  margin-right: -0.5rem;
+  transition: 0.15s opacity;
+  width: 2rem;
+
+  @include breakpoint() {
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &.favorite {
+    background-image: url(/images/icons/favorite.yellow.svg);
+  }
+
+  span {
+    display: none;
+  }
+
+  @include light() {
+    background-image: url(/images/icons/favorite.black.svg);
   }
 }

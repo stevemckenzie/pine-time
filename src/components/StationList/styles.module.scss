@@ -1,0 +1,40 @@
+@import '../../styles/colors.scss';
+
+ul.stationList {
+    border-radius: 0.5rem;
+    list-style-type: none;
+    margin: 1rem 0 0;
+    overflow: hidden;
+    padding: 0;
+
+    li {
+      margin: 0;
+      padding: 0;
+      position: relative;
+
+      a {
+        background-color: $charcoal;
+        color: $aliceBlue;
+        display: block;
+        padding: 1rem;
+        text-decoration: none;
+        transition: 0.15s background-color;
+
+        &:hover {
+          background-color: $gunmetal;
+        }
+
+        span {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          text-transform: capitalize;
+        }
+
+        .meta {
+          font-size: 0.85rem;
+          margin-left: 1rem;
+        }
+      }
+    }
+  }

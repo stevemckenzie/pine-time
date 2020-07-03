@@ -1,22 +1,26 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from '../Link';
-import Routes from '../../routes';
 
 import styles from './styles.module.scss';
 
-const App = () => (
-  <div className={styles.app}>
+const Page = ({ children, header }) => (
+  <div className={styles.page}>
     <div className={styles.header}>
       <Link className={styles.logo} to="/">
         <h1>Pine Time</h1>
       </Link>
-      <Link className={styles.searchButton} title="Search for a weather station" to="/stations/search" />
+      {header}
     </div>
     <div className={styles.content}>
-      <Routes />
+      {children}
     </div>
   </div>
 );
 
-export default App;
+Page.propTypes = {
+  header: PropTypes.node,
+};
+
+export default Page;

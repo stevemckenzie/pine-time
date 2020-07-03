@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import App from './components/App';
+import Routes from './routes';
 import * as serviceWorker from './serviceWorker';
 import { createStore } from './store';
+
 import './styles/index.scss';
 
 const store = createStore();
@@ -14,7 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <App />
+        <Routes />
       </Router>
     </Provider>
   </React.StrictMode>,
