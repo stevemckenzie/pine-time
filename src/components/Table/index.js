@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Table = ({ children, headers, rows }) => (
+const Table = ({ headers, rows }) => (
   <table>
     <thead>
       <tr>
@@ -19,8 +19,12 @@ const Table = ({ children, headers, rows }) => (
     <tbody>
       {rows.map((columns, index) => (
         <tr key={index}>
-          {columns.map((column) =>
-            typeof column === 'object' ? column : <td>{column}</td>,
+          {columns.map((column, i) =>
+            typeof column === 'object' ? (
+              column
+            ) : (
+              <td key={headers[i]}>{column}</td>
+            ),
           )}
         </tr>
       ))}
@@ -29,8 +33,8 @@ const Table = ({ children, headers, rows }) => (
 );
 
 Table.propTypes = {
-  headers: PropTypes.oneOfType([PropTypes.string, 'th']),
-  rows: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, 'th'])),
+  headers: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  rows: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.node])),
 };
 
 export default Table;

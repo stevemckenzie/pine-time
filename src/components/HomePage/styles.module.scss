@@ -1,0 +1,28 @@
+@import '../../styles/mixins.scss';
+
+.home {
+  position: relative;
+}
+
+.searchButton {
+  background: url(/images/icons/search.aliceBlue.svg) center center no-repeat;
+  background-size: 1.25rem;
+  height: 2rem;
+  margin-right: -0.5rem;
+  transition: 0.15s opacity;
+  width: 2rem;
+
+  span {
+    display: none;
+  }
+
+  @include breakpoint() {
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  @include light() {
+    background-image: url(/images/icons/search.black.svg);
+  }
+}
