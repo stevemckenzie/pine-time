@@ -95,12 +95,14 @@ const StationPage = () => {
         )}
         {items.length > 0 && (
           <div className={styles.items}>
-            <DatePicker
-              minDate={moment(firstUpdated).toDate()}
-              onChange={handleDateChange}
-              title={currentDateTitle}
-              value={currentDate.toDate()}
-            />
+            <div className={styles.filter}>
+              <DatePicker
+                minDate={moment(firstUpdated).toDate()}
+                onChange={handleDateChange}
+                title={currentDateTitle}
+                value={currentDate.toDate()}
+              />
+            </div>
             {items.map(
               ({
                 date,
