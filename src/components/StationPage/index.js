@@ -89,17 +89,17 @@ const StationPage = () => {
             <div>Last updated: {moment(lastUpdated).format(DATE_FORMAT)}</div>
           </div>
         )}
-        {items.length > 0 && (
-          <div className={styles.items}>
-            <div className={styles.filter}>
-              <DatePicker
-                minDate={moment(firstUpdated).toDate()}
-                onChange={handleDateChange}
-                title={currentDateTitle}
-                value={currentDate.toDate()}
-              />
-            </div>
-            {items.map(
+        <div className={styles.items}>
+          <div className={styles.filter}>
+            <DatePicker
+              minDate={moment(firstUpdated).toDate()}
+              onChange={handleDateChange}
+              title={currentDateTitle}
+              value={currentDate.toDate()}
+            />
+          </div>
+          {items.length > 0 ? (
+            items.map(
               ({
                 date,
                 maxTemperature,
@@ -114,18 +114,30 @@ const StationPage = () => {
                 >
                   <div className={styles.day}>{moment(date).format('D')}</div>
                   <div className={styles.temp}>
-                    <div className={styles.high}>{maxTemperature}</div>
-                    <div className={styles.right}>
-                      <div className={styles.c}>°C</div>
-                      <div className={styles.low}>{minTemperature}</div>
-                    </div>
+                    {maxTemperature && minTemperature ? (
+                      <>
+                        <div className={styles.high}>{maxTemperature}</div>
+                        <div className={styles.right}>
+                          <div className={styles.c}>°C</div>
+                          <div className={styles.low}>{minTemperature}</div>
+                        </div>
+                      </>
+                    ) : (
+                      <div>N/A</div>
+                    )}
                   </div>
-                  <div className={styles.mm}>{totalPrecipitation}mm</div>
+                  <div className={styles.mm}>
+                    {typeof totalPrecipitation === 'number'
+                      ? `${totalPrecipitation}mm`
+                      : ''}
+                  </div>
                 </div>
               ),
-            )}
-          </div>
-        )}
+            )
+          ) : (
+            <p>Data not available.</p>
+          )}
+        </div>
         {loading && <LoadingIndicator className={styles.loadingIndicator} />}
       </div>
     </Page>
