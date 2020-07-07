@@ -25,7 +25,16 @@ const HomePage = () => {
       }
     >
       <div className={styles.homePage}>
-        <StationList stations={favoriteStations} />
+        {favoriteStations && favoriteStations.length > 0 ? (
+          <StationList stations={favoriteStations} />
+        ) : (
+          <p>
+            <Link title="Search" to="/stations/search">
+              Search
+            </Link>{' '}
+            for weather stations.
+          </p>
+        )}
       </div>
     </Page>
   );
