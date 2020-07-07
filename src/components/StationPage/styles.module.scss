@@ -2,14 +2,16 @@
 @import '../../styles/mixins.scss';
 
 .stationPage {
-  display: flex;
   flex: 1;
-  flex-direction: column;
 
   .items {
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
+
+    .filter {
+      margin-bottom: 1rem;
+    }
 
     .item {
       align-items: center;
@@ -17,7 +19,7 @@
       border-radius: 0.5rem;
       display: flex;
       justify-content: space-between;
-      margin: 1rem 0;
+      margin: 0.5rem 0;
       padding: 1rem;
 
       @include light() {

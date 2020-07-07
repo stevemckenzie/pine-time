@@ -77,7 +77,7 @@ input {
   appearance: none;
   border: 1px solid $aliceBlue;
   box-shadow: none;
-  color: $aliceBlue;
+  color: $richBlack;
   display: inline-flex;
   font-size: 1rem;
   outline: none;
@@ -96,6 +96,5 @@ input {
 
   @include light() {
     border-color: $charcoal;
-    color: $richBlack;
   }
 }
