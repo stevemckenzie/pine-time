@@ -24,23 +24,25 @@ export const normalizeStations = (features) =>
   );
 
 export const normalizeStationItems = (features) =>
-  sortBy(features.map(
-    ({
-      properties: {
-        LOCAL_DATE: date,
-        MAX_TEMPERATURE: maxTemperature,
-        MEAN_TEMPERATURE: meanTemperature,
-        MIN_TEMPERATURE: minTemperature,
-        TOTAL_PRECIPITATION: totalPrecipitation,
-        // TODO: should we add these?
-        // COOLING_DEGREE_DAYS
-        // HEATING_DEGREE_DAYS:
-      },
-    }) => ({
-      date,
-      maxTemperature,
-      meanTemperature,
-      minTemperature,
-      totalPrecipitation,
-    }),
-  ), 'date');
+  sortBy(
+    features.map(
+      ({
+        properties: {
+          LOCAL_DATE: date,
+          MAX_TEMPERATURE: maxTemperature,
+          MIN_TEMPERATURE: minTemperature,
+          TOTAL_PRECIPITATION: totalPrecipitation,
+          // TODO: should we add these?
+          // COOLING_DEGREE_DAYS
+          // HEATING_DEGREE_DAYS:
+          // MEAN_TEMPERATURE
+        },
+      }) => ({
+        date,
+        maxTemperature,
+        minTemperature,
+        totalPrecipitation,
+      }),
+    ),
+    'date',
+  );
