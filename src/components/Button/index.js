@@ -8,6 +8,7 @@ import styles from './styles.module.scss';
 
 const Button = ({
   children,
+  className,
   disabled,
   kind,
   loading = false,
@@ -18,13 +19,14 @@ const Button = ({
     className={classnames(styles.button, {
       [styles[kind]]: !!kind,
       [styles.loading]: loading,
+      [className]: !!className,
     })}
     disabled={disabled || loading}
     title={title}
     {...props}
   >
     {loading && <LoadingIndicator className={styles.loadingIndicator} />}
-    <span className={styles.children}>{children || title}</span>
+    <span>{children || title}</span>
   </button>
 );
 

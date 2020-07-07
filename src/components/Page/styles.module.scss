@@ -25,7 +25,7 @@
     }
 
     @include light {
-      background-color: $aliceBlue;
+      background-color: rgba($blueGreen, 0.96);
       color: $richBlack;
     }
 

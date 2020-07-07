@@ -36,7 +36,13 @@
   &.secondary {
     @include styledButton();
     background-color: $richBlack;
+    border-color: $spanishBistre;
     color: $aliceBlue;
+
+    @include light() {
+      background-color: transparent;
+      color: $richBlack;
+    }
   }
 
   &:disabled {
@@ -48,7 +54,7 @@
     cursor: wait;
     opacity: 1;
 
-    .children {
+    > span {
       visibility: hidden;
     }
 
@@ -70,7 +76,7 @@
     }
   }
 
-  .children {
+  > span {
     align-items: center;
     display: flex;
     flex: 1;

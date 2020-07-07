@@ -1,0 +1,123 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+
+.datePicker {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  .button {
+    font-size: 1.25rem;
+  }
+
+  .calendarContainer {
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1311);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: absolute;
+
+    :global {
+      .react-calendar {
+        background-color: $gunmetal;
+        border: none;
+
+        @include light() {
+          background-color: $aliceBlue;
+        }
+
+        &__month-view__days__day {
+          color: $aliceBlue;
+
+          @include light() {
+            color: $richBlack;
+          }
+
+          &--neighboringMonth {
+            opacity: 0.5;
+          }
+        }
+
+        &__year-view__months__month {
+          color: $aliceBlue;
+
+          @include light() {
+            color: $richBlack;
+          }
+        }
+
+        &__navigation {
+          button {
+            background: none;
+            color: $aliceBlue;
+
+            @include light() {
+              color: $richBlack;
+            }
+
+            &:disabled {
+              cursor: not-allowed;
+              opacity: 0.25;
+            }
+
+            &:hover {
+              background-color: $charcoal;
+
+              @include light() {
+                background: $blueGreen;
+              }
+            }
+          }
+        }
+
+        &__tile {
+          &:disabled {
+            background: none;
+            cursor: not-allowed;
+            opacity: 0.25;
+          }
+
+          &:hover {
+            background: $charcoal;
+
+            @include light() {
+              background: $blueGreen;
+            }
+          }
+
+          &--active,
+          &--hasActive {
+            background: $spanishBistre;
+
+            @include light() {
+              background: $yellowCrayola;
+            }
+
+            &:hover {
+              background: $spanishBistre;
+
+              @include light() {
+                background: $yellowCrayola;
+              }
+            }
+          }
+
+          &--now {
+            background: $richBlack;
+
+            @include light() {
+              background: $burntSienna;
+            }
+
+            &:hover {
+              background: $richBlack;
+
+              @include light() {
+                background: $burntSienna;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
