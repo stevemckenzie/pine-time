@@ -48,7 +48,9 @@ export const createStore = () => {
   store.subscribe(() => {
     store.subscribe(
       throttle(() => {
-        persistState(store.getState());
+        // TODO: figure out a better way to manage selective persisting.
+        const { stations } = store.getState();
+        persistState({ stations });
       }, 1000),
     );
   });
