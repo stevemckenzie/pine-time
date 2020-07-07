@@ -1,22 +1,22 @@
-import moment from 'moment';
-
 import { getClimateStationItems } from '../api';
 import { normalizeStationItems } from '../normalizers';
 
 import { setLoading } from './loading';
 
+const updateStationItems = (id, items) => ({
+  type: 'STATION_ITEMS_UPDATE',
+  items: {
+    [id]: items,
+  },
+});
+
 // TODO: add error handling.
-export const loadStationItems = (id) => async (
+export const loadStationItems = ({ id, limit, month, year }) => async (
   dispatch,
   getState,
 ) => {
   dispatch(setLoading(true));
-
-  // TODO: make this configurable for the user.
-  const limit = 30;
-  const today = moment();
-  const month = today.format('M');
-  const year = today.format('YYYY');
+  dispatch(updateStationItems(id, []));
 
   const { features: climateStationItems } = await getClimateStationItems({
     id,
@@ -24,14 +24,7 @@ export const loadStationItems = (id) => async (
     month,
     year,
   });
-  const items = normalizeStationItems(climateStationItems);
 
-  dispatch({
-    type: 'STATION_ITEMS_UPDATE',
-    items: {
-      [id]: items,
-    },
-  });
-
+  dispatch(updateStationItems(id, normalizeStationItems(climateStationItems)));
   dispatch(setLoading(false));
 };
