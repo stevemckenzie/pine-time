@@ -24,15 +24,11 @@ import Page from '../Page';
 import styles from './styles.module.scss';
 
 const dateToString = (date) => moment(date).format(DATE_FORMAT);
-const getDayMonthYear = (date) => {
-  const d = moment(date);
-
-  return {
-    day: d.format('D'),
-    month: d.format('M'),
-    year: d.format('YYYY'),
-  };
-};
+const getDayMonthYear = (date) => ({
+  day: date.format('D'),
+  month: date.format('M'),
+  year: date.format('YYYY'),
+});
 
 const StationPage = () => {
   const dispatch = useDispatch();
@@ -54,6 +50,7 @@ const StationPage = () => {
   const { date: queryDate } = parse(search.substr(1));
   const currentDate = queryDate ? moment(queryDate, DATE_FORMAT) : moment();
   const currentDateTitle = currentDate.format('MMMM YYYY');
+  const { month, year } = getDayMonthYear(currentDate);
 
   useEffect(() => {
     if (!id) {
@@ -68,9 +65,8 @@ const StationPage = () => {
       return;
     }
 
-    const { month, year } = getDayMonthYear(queryDate);
     dispatch(loadStationItems({ id, month, year }));
-  }, [dispatch, id, queryDate]);
+  }, [dispatch, id, month, year]);
 
   return (
     <Page
@@ -114,6 +110,7 @@ const StationPage = () => {
                   className={classnames(styles.item, {
                     [styles.selected]: moment(date).isSame(currentDate),
                   })}
+                  key={date}
                 >
                   <div className={styles.day}>{moment(date).format('D')}</div>
                   <div className={styles.temp}>
